@@ -2,30 +2,36 @@
 
 Class Cards {
 
-	public function __construct() {
+	public function get_cards($db) {
 
 		try {
-
-			$cardquery = new PDO("mysql:host=$db['hostname'];dbname=$db['name']", $db['user'], $db['password']);
+			$cardquery = new PDO($db['connection_string'], $db['username'], $db['password']);
 			$cardquery->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		} catch (PDOException $e) {
+			echo 'Oops, could not connect to the database';
+			exit;
+		}
 
-			$sql = 'SELECT * FROM cards';
-			$query = $cardquery->prepare($sql);
-			$query->execute();
-			$cards = $query->fetchAll();
-			$cardCount = $query->rowCount();
+		$sql = 'SELECT * FROM cards';
+		$query = $cardquery->prepare($sql);
 
-			for($i=0; $i<=$cardCount; $i++) {
-				$cards[$i]['uses'] = 0;
+		if ($query) {
+			
+			$result = $query->execute();
+
+			if ($result) {
+				// While there are rows return each row and add uses to the associative array
+				//$cards = $query->fetchAll(PDO::FETCH_ASSOC);
+			} else {
+				$error = $query->errorInfo();
+				echo "Oops, the query failed. It slammed the door and yelled: " . $error[2];
 			}
 
-			return $cards;
-
 		}
 
-		catch (PDOException $e) {
-			echo 'Oops, cardQuery error: ' . $e->getMessage();
-		}
+		// for($i=0; $i<=$cardCount; $i++) {
+		// 	$cards[$i]['uses'] = 0;
+		// }
 
 	}
 
