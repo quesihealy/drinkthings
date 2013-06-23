@@ -1,20 +1,12 @@
 <?php
 
-//Include Database Connection
-include_once '/includes/db.php';
-
 Class Cards {
 
 	public function __construct() {
 
-		$credentials = credentials();
-		$hostname = $credentials['hostname'];
-		$username = $credentials['username'];
-		$password = $credentials['password'];
-
 		try {
 
-			$cardquery = new PDO("mysql:host=$hostname;dbname=gameofthings", $username, $password);
+			$cardquery = new PDO("mysql:host=$db['hostname'];dbname=$db['name']", $db['user'], $db['password']);
 			$cardquery->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			$sql = 'SELECT * FROM cards';
