@@ -17,7 +17,6 @@ jQuery(document).ready(function($) {
 			dataType: "json",
 			success: function(data) {
 				$('.cards').show();
-				$('.cards').html("<p class=" + data.id + ">" + data.thing + "</p>");
 			},
 	    error: function(XMLHttpRequest, textStatus, errorThrown) { 
         alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -27,8 +26,8 @@ jQuery(document).ready(function($) {
 		return false;
 	})
 
-	function next_card() {
+	$('.next_card').click(function() {
 		
-	}
+	})
 
 })

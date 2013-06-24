@@ -82,10 +82,9 @@ Class Cards {
 
 	}
 
-	public function use_card($db) {
+	public function use_card($db, $deck_of_cards) {
 		
 		$card_count = $this->count_cards($db) - 1;
-		$deck_of_cards = $this->get_cards($db);
 
 		$random_number = rand(0, $card_count);
 		
