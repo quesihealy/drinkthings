@@ -2,6 +2,12 @@
 
 Class Cards {
 
+	public function __construct() {
+		$this->id = '';
+		$this->thing = '';
+		$this->use = '';
+	}
+
 	public function count_cards($db) {
 
 		try {
@@ -34,6 +40,8 @@ Class Cards {
 
 	public function get_cards($db) {
 
+		$card_count = $this->count_cards($db);
+
 		try {
 			$cardquery = new PDO($db['connection_string'], $db['username'], $db['password']);
 			$cardquery->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -51,8 +59,20 @@ Class Cards {
 
 			if ($result) {
 				// While there are rows return each row and add uses to the associative array
-				$cards = $query->fetchAll(PDO::FETCH_ASSOC);
-				return $cards;
+				while( $row = $query->fetch(PDO::FETCH_ASSOC) ) {
+
+					$temp_cards = new Cards();
+
+					$temp_cards->id = $row['id'];
+					$temp_cards->thing = $row['thing'];
+					$temp_cards->use = 0;
+
+					$all_cards[] = $temp_cards;
+
+				}
+
+				return $all_cards;
+			
 			} else {
 				$error = $query->errorInfo();
 				echo "Oops, the query failed. It slammed the door and yelled: " . $error[2];
@@ -60,19 +80,24 @@ Class Cards {
 
 		}
 
-		// for($i=0; $i<=$cardCount; $i++) {
-		// 	$cards[$i]['uses'] = 0;
-		// }
-
 	}
 
-	public function display_card($db) {
+	public function use_card($db) {
 		
-		$card_count = $this->count_cards($db);
+		$card_count = $this->count_cards($db) - 1;
 		$deck_of_cards = $this->get_cards($db);
 
-		$random_id = rand(0, $card_count);
-		echo $deck_of_cards[$random_id]['thing'];
+		$random_number = rand(0, $card_count);
+		
+		$current_card = $deck_of_cards[$random_number];
+		$current_card->use++;
+
+		while($current_card->use >= 2) {
+			$current_card = rand(0, $card_count);
+			$current_card->use++;
+		}
+
+		return $current_card;
 	
 	}
 
