@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 
 		$.ajax({
 			type: "POST",
-			url: "controllers/cards.php",
+			url: "controllers/cards/get_card.php",
 			data: datas,
 			dataType: "json",
 			success: function(data) {
@@ -22,12 +22,27 @@ jQuery(document).ready(function($) {
         alert("Status: " + textStatus); alert("Error: " + errorThrown); 
     	} 
 		})
-		
 		return false;
+
 	})
 
-	$('.next_card').click(function() {
-		
+	$('.cards').click(function() {
+	
+		$.ajax({
+			type: "POST",
+			url: "controllers/cards/next_card.php",
+			dataType: "json",
+			success: function(data) {
+				$('.cards').html('');
+				$('.cards').append('<p class="card '+data.id+'">'+data.thing+'</p>');
+				// Replace with next
+				
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status: " + textStatus); alert("Error: " + errorThrown);
+			}
+		})
+		return false;
 	})
 
 })

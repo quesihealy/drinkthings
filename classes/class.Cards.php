@@ -100,4 +100,10 @@ Class Cards {
 	
 	}
 
+	public function next_card($db, $current_card) {
+		
+		$current_card->use++;
+		return $current_card;
+	}
+
 }

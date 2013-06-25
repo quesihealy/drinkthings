@@ -1,4 +1,6 @@
 	<?php
+	session_start();
+
 	include_once '/includes/config.php';
 	include_once '/classes/class.Cards.php';
 	
@@ -8,5 +10,7 @@
 	?>
 
 	<section id="content" class="cards">
-		<p class="next_card"><?php echo $current_card->thing; ?></p>
-	</section><!-- /#content --> 
+		<p class="card <?php echo $current_card->id; ?>"><?php echo $current_card->thing; ?></p>
+	</section>
+
+	<?php $_SESSION['deck'] = $deck_of_cards; ?>
