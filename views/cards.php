@@ -1,6 +1,4 @@
 	<?php
-	session_start();
-
 	include_once '/includes/config.php';
 	include_once '/classes/class.Cards.php';
 	

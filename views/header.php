@@ -15,6 +15,5 @@
 		<link rel="stylesheet" href="<?php echo dirname($_SERVER['PHP_SELF']); ?>/styles.css" type="text/css" />
 		<link href='http://fonts.googleapis.com/css?family=Londrina+Solid' rel='stylesheet' type='text/css'>
 		 
-		<!--[if IE]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	</head>

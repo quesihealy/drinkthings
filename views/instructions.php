@@ -8,7 +8,5 @@
 		  
 		<section id="content" class="instructions">
 			<p>As of now this displays "Things..." cards. Play on!</p>
-			<form name="play_game" action="">
-				<input value="play" name="play" class="play" type="submit">
-			</form>
+			<p class="play">Play</p>
 		</section><!-- /#content --> 

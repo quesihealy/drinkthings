@@ -1,28 +1,33 @@
 jQuery(document).ready(function($) {
 
 	$('.cards').hide();
+	$('.number_of_players').hide();
 	
 	$('.play').click(function() {
 		
 		$('.instructions').hide();
 		$('#banner').hide();
+		$('.number_of_players').show();
 
-		var playValue = $("input.play").val();
-		var datas = 'play=' + playValue;
+	})
+
+	$('.number_submit').click(function() {
+
+		var numberValue = $('input.number').val();
+ 		var data = 'number=' + numberValue;
 
 		$.ajax({
 			type: "POST",
-			url: "controllers/cards/get_card.php",
-			data: datas,
+			url: "controllers/players/number_of_players.php",
+			data: data,
 			dataType: "json",
 			success: function(data) {
-				$('.cards').show();
+				$('.number_of_players').html('');
 			},
-	    error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-    	} 
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("Status: " + textStatus); alert("Error: " + errorThrown);
+			}
 		})
-		return false;
 
 	})
 
@@ -35,8 +40,6 @@ jQuery(document).ready(function($) {
 			success: function(data) {
 				$('.cards').html('');
 				$('.cards').append('<p class="card '+data.id+'">'+data.thing+'</p>');
-				// Replace with next
-				
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("Status: " + textStatus); alert("Error: " + errorThrown);
@@ -44,5 +47,30 @@ jQuery(document).ready(function($) {
 		})
 		return false;
 	})
+
+/* This Code is used
+ * when the first card
+ * is ready to be displayed
+ */
+
+// $('.instructions').hide();
+// 		$('#banner').hide();
+
+// 		var playValue = $("input.play").val();
+// 		var datas = 'play=' + playValue;
+
+// 		$.ajax({
+// 			type: "POST",
+// 			url: "controllers/cards/get_card.php",
+// 			data: datas,
+// 			dataType: "json",
+// 			success: function(data) {
+// 				$('.cards').show();
+// 			},
+// 	    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+//         alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+//     	} 
+// 		})
+// 		return false;
 
 })
