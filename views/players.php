@@ -1,9 +1,10 @@
 <?php
-
+// attach database config and players class
 include_once '/includes/config.php';
 include_once '/classes/class.Players.php';
 ?>
 
+	<!-- number of players question -->
 	<section id="content" class="number_of_players">
 		<form name="number_of_players" action="">
   		<label for="number"><h2>Number of Players:</h2></label>

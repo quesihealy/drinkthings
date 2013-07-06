@@ -2,6 +2,7 @@
 
 	<div class="wrap">
  
+ 		<!-- Instructions - inital screen -->
 		<header id="banner" class="body">
 			<h1>Drink Things</h1>
 		</header><!-- /#banner -->	
